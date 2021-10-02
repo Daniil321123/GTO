@@ -66,14 +66,17 @@ public class TuningDetails : NetworkBehaviour
 
     private void setCurrentDetail(GameObject[] details, int indexDetail)
     {
-        if (indexDetail >= details.Length )
+        if (details.Length > 0)
         {
-            indexDetail = 0;
+            if (indexDetail >= details.Length)
+            {
+                indexDetail = 0;
+            }
+            for (int i = 0; i < details.Length - 1; i++)
+            {
+                details[i].gameObject.SetActive(false);
+            }
+            details[indexDetail].gameObject.SetActive(true);
         }
-        for (int i = 0; i < details.Length - 1; i++)
-        {
-            details[i].gameObject.SetActive(false);
-        }
-        details[indexDetail].gameObject.SetActive(true);
     }
 }

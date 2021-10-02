@@ -28,7 +28,7 @@ public class ButtonForTuningMenu : NetworkBehaviour
     private HelloWorldPlayer car;
     private SetTuning setDetails;
 
-    public int currentCategory;
+    public int currentCategory = 0;
     public bool unloadLevel = false;
 
     private void Start()
@@ -198,7 +198,6 @@ public class ButtonForTuningMenu : NetworkBehaviour
                 playerData.UnloadTuningServerRpc();
                 Destroy(gameObject);
             }
-
         }
     }
 

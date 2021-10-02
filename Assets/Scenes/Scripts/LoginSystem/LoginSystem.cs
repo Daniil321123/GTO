@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Web;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -9,8 +9,6 @@ public class LoginSystem : MonoBehaviour
     public CurrentWindow currentWindow = CurrentWindow.Login;
 
     [SerializeField] private HelloWorldManager helloWorldManager;
-    [SerializeField] public PlayerInfo playerInfo;
-
     string loginEmail = "";
     string loginPassword = "";
     string registerEmail = "";
@@ -27,7 +25,8 @@ public class LoginSystem : MonoBehaviour
     string userName = "";
     string userEmail = "";
 
-    string rootURL = "http://92.63.101.74/"; //Path where php files are located
+    //string rootURL = "http://92.63.101.74/"; //Path where php files are located
+    string rootURL = "http://192.168.0.168/"; //Path where php files are located
 
     private GUILayoutOption heightField = GUILayout.Height(85);
     private GUILayoutOption buttonSizeWidth = GUILayout.Width(125);
@@ -241,12 +240,14 @@ public class LoginSystem : MonoBehaviour
                     {
                         if (dataChunks[2] == "currentCar")
                         {
-                            playerInfo.currentCar = dataChunks[3];
+                            PlayerInfo.currentCar = Int32.Parse(dataChunks[3]);
                         }
                         else if(dataChunks[4] == "money")
                         {
-                            playerInfo.money = dataChunks[5];
+                            PlayerInfo.money = dataChunks[5];
                         }
+                        PlayerInfo.nicName = loginEmail;
+                        PlayerInfo.password = loginPassword;
                         isLoggedIn = true;
                         ResetValues();
                         helloWorldManager.transform.gameObject.SetActive(true);

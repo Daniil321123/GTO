@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4ecf7671992de48be7991cbde8506d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carsList:
-  - {fileID: 790733384388048915, guid: b1ceda9764178df46bfdda166811a0e4, type: 3}
+  carsList: {fileID: 11400000, guid: 5c2e1cfe47ee1a74991903cfcdc723cb, type: 2}
   showroomMenu: {fileID: 0}
   spawn: 1
 --- !u!114 &8863526141731437770

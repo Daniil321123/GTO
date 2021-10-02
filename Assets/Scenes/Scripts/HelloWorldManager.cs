@@ -10,10 +10,10 @@ public class HelloWorldManager : MonoBehaviour
         {
             StartButtons();
         }
-        else
-        {
-            StatusLabels();
-        }
+        //else
+        //{
+        //    StatusLabels();
+        //}
         GUILayout.EndArea();
     }
 

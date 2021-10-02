@@ -1,16 +1,13 @@
 using UnityEngine;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using MLAPI;
-using MLAPI.NetworkVariable;
 using MLAPI.Messaging;
-using MLAPI.Transports.UNET;
+using MLAPI.NetworkVariable;
 using UnityEngine.SceneManagement;
 
 public class ShowroomCars : NetworkBehaviour
 {
-    [SerializeField] public GameObject[] cars;
+    [SerializeField] public CarsList cars;
 
     private NetworkVariableInt currentCarPlayer = new NetworkVariableInt(0);
 
@@ -24,14 +21,12 @@ public class ShowroomCars : NetworkBehaviour
 
     private void Start()
     {
-        currentCarPlayer.Settings.WritePermission = NetworkVariablePermission.OwnerOnly;
-        currentCarPlayer.Settings.ReadPermission = NetworkVariablePermission.OwnerOnly;
-
-        countCar = cars.Length;
-        car = Instantiate(cars[currentcar]);
+        countCar = cars.vehicles.Length;
+        car = Instantiate(cars.vehicles[currentcar]);
         car.transform.position = positionTransform;
         car.transform.rotation = positionRot;
     }
+
 
     public void nexCar()
     {
@@ -41,7 +36,7 @@ public class ShowroomCars : NetworkBehaviour
             if (currentcar < countCar)
             {
                 Destroy(car.gameObject);
-                car = Instantiate(cars[currentcar]);
+                car = Instantiate(cars.vehicles[currentcar]);
                 car.transform.position = positionTransform;
                 car.transform.rotation = positionRot;
             }
@@ -49,7 +44,7 @@ public class ShowroomCars : NetworkBehaviour
             {
                 currentcar = 0;
                 Destroy(car.gameObject);
-                car = Instantiate(cars[currentcar]);
+                car = Instantiate(cars.vehicles[currentcar]);
                 car.transform.position = positionTransform;
                 car.transform.rotation = positionRot;
             }
@@ -65,14 +60,14 @@ public class ShowroomCars : NetworkBehaviour
             {
                 currentcar = countCar - 1;
                 Destroy(car.gameObject);
-                car = Instantiate(cars[currentcar]);
+                car = Instantiate(cars.vehicles[currentcar]);
                 car.transform.position = positionTransform;
                 car.transform.rotation = positionRot;
             }
             else 
             {
                 Destroy(car.gameObject);
-                car = Instantiate(cars[currentcar]);
+                car = Instantiate(cars.vehicles[currentcar]);
                 car.transform.position = positionTransform;
                 car.transform.rotation = positionRot;
             }
@@ -104,7 +99,7 @@ public class ShowroomCars : NetworkBehaviour
             if (playerCar != null)
             {
                 playerData.destroyCameraServerRpc();
-                playerCar.GetComponent<SpawnCars>().SpawnCar(currentcar);
+                playerCar.GetComponent<SpawnCars>().SpawnCar();
                 Destroy(gameObject);
             }
 
@@ -112,10 +107,19 @@ public class ShowroomCars : NetworkBehaviour
     }
 
     public void OnBack()
-    {
-        currentCarPlayer.Value = currentcar;
+    {       
         Destroy(car.gameObject);
         unloadLevel = true;
     }
 
+
+    public void OnConfirm()
+    {
+        var playerCar = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject;
+        if (playerCar != null)
+        {
+            playerCar.GetComponent<SpawnCars>().setNewCarServerRpc(currentcar);
+        }
+       
+    }
 }

@@ -3,8 +3,6 @@ using System.Collections;
 using MLAPI;
 using MLAPI.Messaging;
 using MLAPI.NetworkVariable;
-using MLAPI.NetworkVariable.Collections;
-using System;
 
 public class SetTuning : NetworkBehaviour
 {
@@ -58,7 +56,7 @@ public class SetTuning : NetworkBehaviour
 
     private void Singleton_OnClientDisconnectCallback(ulong obj)
     {
-        throw new NotImplementedException();
+        setOnlineServerRpc(false);
     }
 
     private void Singleton_OnClientConnectedCallback(ulong obj)
@@ -132,16 +130,19 @@ public class SetTuning : NetworkBehaviour
 
     private IEnumerator startOnline()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         if (!IsOwner)
         {
-            tuningDetails.setDetails(m_currentFronBumper.Value, FRONTBUMPER);
-            tuningDetails.setDetails(m_currentRearBumper.Value, REARBUMPER);
-            tuningDetails.setDetails(m_currentExhaust.Value, EXHAUSTS);
-            tuningDetails.setDetails(m_currentExt.Value, EXTS);
-            tuningDetails.setDetails(m_currentFender.Value, FENDERS);
-            tuningDetails.setDetails(m_currentRoof.Value, ROOFS);
-            tuningDetails.setDetails(m_currentSpoiler.Value, SPOILERS);
+            if (tuningDetails != null)
+            {
+                tuningDetails.setDetails(m_currentFronBumper.Value, FRONTBUMPER);
+                tuningDetails.setDetails(m_currentRearBumper.Value, REARBUMPER);
+                tuningDetails.setDetails(m_currentExhaust.Value, EXHAUSTS);
+                tuningDetails.setDetails(m_currentExt.Value, EXTS);
+                tuningDetails.setDetails(m_currentFender.Value, FENDERS);
+                tuningDetails.setDetails(m_currentRoof.Value, ROOFS);
+                tuningDetails.setDetails(m_currentSpoiler.Value, SPOILERS);
+            }
         }
     }
 
@@ -187,5 +188,4 @@ public class SetTuning : NetworkBehaviour
     {
         Online.Value = online;
     }
-
 }

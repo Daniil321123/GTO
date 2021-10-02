@@ -70,15 +70,6 @@ public class HelloWorldPlayer : NetworkBehaviour
 
     private NetworkVariableVector3 correctPlayerPos = new NetworkVariableVector3();
     private NetworkVariableQuaternion correctPlayerRot = new NetworkVariableQuaternion();
-
-    public NetworkVariableInt currentFrontBumper;
-    public NetworkVariableInt currentRearBumper;
-    public NetworkVariableInt currentExhaust;
-    public NetworkVariableInt currentExt;
-    public NetworkVariableInt currentFender;
-    public NetworkVariableInt currentRoof;
-    public NetworkVariableInt currentSpoiler;
-
     private NetworkVariableFloat[] cambers;
 
     private RCC_WheelCollider[] wheelColliders;
@@ -139,15 +130,6 @@ public class HelloWorldPlayer : NetworkBehaviour
         useTurbo.Settings.WritePermission = NetworkVariablePermission.Everyone;
 
         indicatorsOn.Settings.WritePermission = NetworkVariablePermission.Everyone;
-
-        currentFrontBumper.Settings.WritePermission = NetworkVariablePermission.Everyone;
-        currentRearBumper.Settings.WritePermission = NetworkVariablePermission.Everyone;
-        currentExhaust.Settings.WritePermission = NetworkVariablePermission.Everyone;
-        currentExt.Settings.WritePermission = NetworkVariablePermission.Everyone;
-        currentFender.Settings.WritePermission = NetworkVariablePermission.Everyone;
-        currentSpoiler.Settings.WritePermission = NetworkVariablePermission.Everyone;
-        currentRoof.Settings.WritePermission = NetworkVariablePermission.Everyone;
-
 
         correctPlayerPos.Settings.WritePermission = NetworkVariablePermission.Everyone;
         correctPlayerRot.Settings.WritePermission = NetworkVariablePermission.Everyone;
@@ -246,14 +228,6 @@ public class HelloWorldPlayer : NetworkBehaviour
             newVehicle.tractionHelper = tractionHelper.Value;
             newVehicle.useNOS = useNOS.Value;
             newVehicle.useTurbo = useTurbo.Value;
-
-            //tuningDetails.setDetails(currentFrontBumper.Value, 0);
-            //tuningDetails.setDetails(currentRearBumper.Value, 1);
-            //tuningDetails.setDetails(currentExhaust.Value, 2);
-            //tuningDetails.setDetails(currentExt.Value, 3);
-            //tuningDetails.setDetails(currentFender.Value, 4);
-            //tuningDetails.setDetails(currentRoof.Value, 5);
-            //tuningDetails.setDetails(currentSpoiler.Value, 6);
 
             newVehicle.indicatorsOn = indicatorsOn.Value;
 

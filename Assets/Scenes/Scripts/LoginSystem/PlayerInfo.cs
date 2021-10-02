@@ -1,14 +1,9 @@
 using UnityEngine;
-
-[System.Serializable]
-public class PlayerInfo : MonoBehaviour
+public class PlayerInfo : ScriptableObject
 {
-    public int res;
-    public string currentCar;
-    public string money;
-    public static PlayerInfo CreateFromJSON(string jsonString)
-    {
-        return JsonUtility.FromJson<PlayerInfo>(jsonString);
-    }
-
+    public static int res;
+    public static int currentCar = 2;
+    public static string money;
+    public static string nicName = "admin";
+    public static string password = "123321";
 }

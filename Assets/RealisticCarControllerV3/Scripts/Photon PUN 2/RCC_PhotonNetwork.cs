@@ -413,10 +413,7 @@ public class RCC_PhotonNetwork : Photon.Pun.MonoBehaviourPunCallbacks, IPunObser
 			currentVelocity = (Vector3)stream.ReceiveNext();
 
 			updateTime = Time.time;
-
 		}
-
 	}
-
 }
 #endif
